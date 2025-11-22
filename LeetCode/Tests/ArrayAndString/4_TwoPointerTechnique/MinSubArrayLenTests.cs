@@ -1,5 +1,8 @@
 ﻿namespace Tests.ArrayAndString._4_TwoPointerTechnique;
 
+/// <summary>
+/// Найти минимальную длину подмассива, сумма которого >= таргету https://leetcode.com/explore/learn/card/array-and-string/205/array-two-pointer-technique/1299/
+/// </summary>
 public class MinSubArrayLenTests
 {
     [Theory]
