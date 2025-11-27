@@ -72,18 +72,6 @@ public class DetectCycleTests
         Assert.Equal(e6, result);
     }
 
-    public class ListNode
-    {
-        public int val;
-        public ListNode next;
-
-        public ListNode(int x)
-        {
-            val = x;
-            next = null;
-        }
-    }
-
     public ListNode DetectCycle(ListNode head)
     {
         if (head == null || head.next == null)
