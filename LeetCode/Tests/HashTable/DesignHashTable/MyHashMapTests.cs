@@ -1,5 +1,8 @@
 ﻿namespace Tests.HashTable.DesignHashTable;
 
+/// <summary>
+/// Design HashMap https://leetcode.com/explore/learn/card/hash-table/182/practical-applications/1140/
+/// </summary>
 public class MyHashMapTests
 {
     [Fact]
