@@ -1,7 +1,7 @@
 namespace Tests.ArrayAndString._5_Conclusion;
 
 /// <summary>
-/// Вставка, удаление, рандомное получение на O(1) https://leetcode.com/explore/learn/card/hash-table/187/conclusion-hash-table/1141/
+/// Вставка, удаление, рандомное получение за O(1) https://leetcode.com/explore/learn/card/hash-table/187/conclusion-hash-table/1141/
 /// </summary>
 public class RandomizedSetTests
 {
