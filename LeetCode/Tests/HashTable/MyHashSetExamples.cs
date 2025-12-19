@@ -8,7 +8,7 @@ public class MyHashSetExamples
         MyHashSet myHashSet = new MyHashSet();
         myHashSet.Add(1); // set = [1]
         myHashSet.Add(2); // set = [1, 2]
-        myHashSet.Add(11);
+        myHashSet.Add(11); // пример с коллизией, добавится в тот же бакет, что и 1, тк 11 % 10 == 1
         Assert.True(myHashSet.Contains(1)); // return True
         Assert.True(myHashSet.Contains(11));
         Assert.False(myHashSet.Contains(3)); // return False, (not found)
