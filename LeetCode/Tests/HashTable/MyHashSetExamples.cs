@@ -1,9 +1,6 @@
-﻿namespace Tests.HashTable.DesignHashTable;
+namespace Tests.HashTable;
 
-/// <summary>
-/// Design HashSet https://leetcode.com/explore/learn/card/hash-table/182/practical-applications/1139/
-/// </summary>
-public class MyHashSetTests
+public class MyHashSetExamples
 {
     [Fact]
     public void Test()
@@ -11,7 +8,9 @@ public class MyHashSetTests
         MyHashSet myHashSet = new MyHashSet();
         myHashSet.Add(1); // set = [1]
         myHashSet.Add(2); // set = [1, 2]
+        myHashSet.Add(11);
         Assert.True(myHashSet.Contains(1)); // return True
+        Assert.True(myHashSet.Contains(11));
         Assert.False(myHashSet.Contains(3)); // return False, (not found)
         myHashSet.Add(2); // set = [1, 2]
         Assert.True(myHashSet.Contains(2)); // return True
@@ -21,7 +20,7 @@ public class MyHashSetTests
 
     private class MyHashSet
     {
-        private const int Size = 10000;
+        private const int Size = 10;
 
         // массив списков для разрешения коллизий
         private readonly List<int>[] buckets;
@@ -65,31 +64,6 @@ public class MyHashSetTests
                 return false;
 
             return buckets[index].Contains(key);
-        }
-    }
-
-    public class MyHashSet1
-    {
-        private List<int> _arr = new List<int>();
-
-        public MyHashSet1() { }
-
-        public void Add(int key)
-        {
-            if (!_arr.Contains(key))
-            {
-                _arr.Add(key);
-            }
-        }
-
-        public void Remove(int key)
-        {
-            _arr.Remove(key);
-        }
-
-        public bool Contains(int key)
-        {
-            return _arr.Contains(key);
         }
     }
 }
