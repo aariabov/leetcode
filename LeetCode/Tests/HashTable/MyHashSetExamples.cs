@@ -17,17 +17,64 @@ public class MyHashSetExamples
         myHashSet.Remove(2); // set = [1]
         Assert.False(myHashSet.Contains(2)); // return False, (already removed)
     }
+    
+    [Fact]
+    public void my_hash_set_capacity_increase()
+    {
+        var myHashSet = new MyHashSet();
+        Assert.Null(myHashSet.Buckets[1]);
+        // после добавления первого элемента для баскета с индексом 1 выделяется массив размером 4
+        myHashSet.Add(1);
+        Assert.Equal(1, myHashSet.Buckets[1].Count);
+        Assert.Equal(4, myHashSet.Buckets[1].Capacity);
+        
+        myHashSet.Add(11);
+        Assert.Equal(2, myHashSet.Buckets[1].Count);
+        Assert.Equal(4, myHashSet.Buckets[1].Capacity);
+        
+        myHashSet.Add(21);
+        Assert.Equal(3, myHashSet.Buckets[1].Count);
+        Assert.Equal(4, myHashSet.Buckets[1].Capacity);
+        
+        // заполняем последний элемент выделенного массива
+        myHashSet.Add(31);
+        Assert.Equal(4, myHashSet.Buckets[1].Count);
+        Assert.Equal(4, myHashSet.Buckets[1].Capacity);
+        
+        // происходит выделение памяти под новый массив
+        myHashSet.Add(41);
+        Assert.Equal(5, myHashSet.Buckets[1].Count);
+        Assert.Equal(8, myHashSet.Buckets[1].Capacity);
+        
+        myHashSet.Add(51);
+        Assert.Equal(6, myHashSet.Buckets[1].Count);
+        Assert.Equal(8, myHashSet.Buckets[1].Capacity);
+        
+        myHashSet.Add(61);
+        Assert.Equal(7, myHashSet.Buckets[1].Count);
+        Assert.Equal(8, myHashSet.Buckets[1].Capacity);
+        
+        // заполняем последний элемент выделенного массива
+        myHashSet.Add(71);
+        Assert.Equal(8, myHashSet.Buckets[1].Count);
+        Assert.Equal(8, myHashSet.Buckets[1].Capacity);
+        
+        // происходит выделение памяти под новый массив
+        myHashSet.Add(81);
+        Assert.Equal(9, myHashSet.Buckets[1].Count);
+        Assert.Equal(16, myHashSet.Buckets[1].Capacity);
+    }
 
     private class MyHashSet
     {
         private const int Size = 10;
 
         // массив списков для разрешения коллизий
-        private readonly List<int>[] buckets;
+        public readonly List<int>[] Buckets;
 
         public MyHashSet()
         {
-            buckets = new List<int>[Size];
+            Buckets = new List<int>[Size];
         }
 
         private int GetIndex(int key)
@@ -39,31 +86,31 @@ public class MyHashSetExamples
         {
             int index = GetIndex(key);
             // если баскет еще не создан - создаем
-            if (buckets[index] == null)
-                buckets[index] = new List<int>();
+            if (Buckets[index] == null)
+                Buckets[index] = new List<int>();
 
             // если в баскете нет значения - добавляем
-            if (!buckets[index].Contains(key))
-                buckets[index].Add(key);
+            if (!Buckets[index].Contains(key))
+                Buckets[index].Add(key);
         }
 
         public void Remove(int key)
         {
             int index = GetIndex(key);
-            if (buckets[index] == null)
+            if (Buckets[index] == null)
                 return;
 
             // если есть бакет - удаляем значение
-            buckets[index].Remove(key);
+            Buckets[index].Remove(key);
         }
 
         public bool Contains(int key)
         {
             int index = GetIndex(key);
-            if (buckets[index] == null)
+            if (Buckets[index] == null)
                 return false;
 
-            return buckets[index].Contains(key);
+            return Buckets[index].Contains(key);
         }
     }
 }
