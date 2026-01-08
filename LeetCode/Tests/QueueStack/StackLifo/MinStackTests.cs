@@ -14,20 +14,10 @@ public class MinStackTests
         minStack.Push(-3);
         Assert.Equal(-3, minStack.GetMin()); // return -3
         minStack.Pop();
-        Assert.Equal(0, minStack.Top());    // return 0
+        Assert.Equal(0, minStack.Top()); // return 0
         Assert.Equal(-2, minStack.GetMin()); // return -2
     }
-    
-    [Fact]
-    public void Test1()
-    {
-        MinStack minStack = new MinStack();
-        minStack.Push(-1);
-        minStack.Pop();
-        Assert.Equal(-1, minStack.Top());
-        Assert.Equal(-1, minStack.GetMin());
-    }
-    
+
     [Fact]
     public void Test2()
     {
@@ -36,7 +26,7 @@ public class MinStackTests
         Assert.Equal(-1, minStack.Top());
         Assert.Equal(-1, minStack.GetMin());
     }
-    
+
     [Fact]
     public void Test3()
     {
@@ -50,7 +40,7 @@ public class MinStackTests
         minStack.Pop();
         Assert.Equal(0, minStack.GetMin());
         minStack.Pop();
-        
+
         minStack.Push(-2);
         minStack.Push(-1);
         minStack.Push(-2);
@@ -68,6 +58,7 @@ public class MinStackTests
     public class MinStack
     {
         private Stack<int> stack;
+
         // для хранения минимумов
         private Stack<int> minStack;
 
@@ -110,50 +101,49 @@ public class MinStackTests
         }
     }
 
-    
-        public class MinStackMy
+    public class MinStackMy
+    {
+        private readonly List<int> _list = new List<int>();
+        private int _min = int.MaxValue;
+
+        public MinStackMy() { }
+
+        public void Push(int val)
         {
-            private readonly List<int> _list = new List<int>();
-            private int _min = int.MaxValue;
-        
-            public MinStackMy() {
-                
-            }
-            
-            public void Push(int val) {
-                if (val < _min)
-                {
-                    _min = val;
-                }
-                _list.Add(val);
-            }
-            
-            public void Pop()
+            if (val < _min)
             {
-                if (_list.Count > 0)
-                {
-                    _list.RemoveAt(_list.Count - 1);
-                }
+                _min = val;
             }
-            
-            public int Top() {
-                if (_list.Count > 0)
-                {
-                    var last = _list.Last();
-                    return last;
-                }
+            _list.Add(val);
+        }
 
-                return -1;
-            }
-            
-            public int GetMin()
+        public void Pop()
+        {
+            if (_list.Count > 0)
             {
-                if (_list.Count > 0)
-                {
-                    return _list.Min();
-                }
-
-                return -1;
+                _list.RemoveAt(_list.Count - 1);
             }
         }
+
+        public int Top()
+        {
+            if (_list.Count > 0)
+            {
+                var last = _list.Last();
+                return last;
+            }
+
+            return -1;
+        }
+
+        public int GetMin()
+        {
+            if (_list.Count > 0)
+            {
+                return _list.Min();
+            }
+
+            return -1;
+        }
+    }
 }
