@@ -1,9 +1,7 @@
-using System.Text;
-
 namespace Tests.BinaryTree.Conclusion;
 
-// [Связать элементы одного уровня](https://leetcode.com/explore/learn/card/data-structure-tree/133/conclusion/994/)
-public class ConnectTests
+// [Связать элементы одного уровня для неполного дерева](https://leetcode.com/explore/learn/card/data-structure-tree/133/conclusion/1016/)
+public class Connect1Tests
 {
     [Fact]
     public void Test()
@@ -14,18 +12,16 @@ public class ConnectTests
         var e3 = new Node(3);
         var e4 = new Node(4);
         var e5 = new Node(5);
-        var e6 = new Node(6);
         var e7 = new Node(7);
 
         e1.left = e2;
         e1.right = e3;
         e2.left = e4;
         e2.right = e5;
-        e3.left = e6;
         e3.right = e7;
 
         var result = Connect(e1);
-        var expected = "1,#,2,3,#,4,5,6,7,#";
+        var expected = "1,#,2,3,#,4,5,7,#";
         var queue = new Queue<Node>();
         queue.Enqueue(result);
         var list = new List<string>();
@@ -68,58 +64,40 @@ public class ConnectTests
         if (root == null)
             return null;
 
-        ConnectNodes(root);
+        // соединяем левый ребёнок
+        if (root.left != null)
+        {
+            if (root.right != null)
+                root.left.next = root.right;
+            else
+                root.left.next = GetNext(root.next);
+        }
+
+        // соединяем правый ребёнок
+        if (root.right != null)
+        {
+            root.right.next = GetNext(root.next);
+        }
+
+        // ВАЖНО: сначала правое поддерево
+        Connect(root.right);
+        Connect(root.left);
+
         return root;
     }
 
-    private void ConnectNodes(Node node)
+    private Node GetNext(Node node)
     {
-        if (node == null || node.left == null)
-            return;
-
-        // 1. Соединяем детей одного родителя
-        node.left.next = node.right;
-
-        // 2. Соединяем детей разных родителей
-        if (node.next != null)
+        while (node != null)
         {
-            node.right.next = node.next.left;
+            if (node.left != null)
+                return node.left;
+            if (node.right != null)
+                return node.right;
+
+            node = node.next;
         }
-
-        // 3. Рекурсия
-        ConnectNodes(node.left);
-        ConnectNodes(node.right);
-    }
-
-    public Node ConnectIter(Node root)
-    {
-        if (root == null)
-            return null;
-
-        Node levelStart = root;
-
-        while (levelStart.left != null) // пока есть следующий уровень
-        {
-            Node current = levelStart;
-
-            while (current != null)
-            {
-                // Связываем левого и правого детей
-                current.left.next = current.right;
-
-                // Связываем правого ребенка с левым ребенком следующего узла
-                if (current.next != null)
-                {
-                    current.right.next = current.next.left;
-                }
-
-                current = current.next;
-            }
-
-            levelStart = levelStart.left;
-        }
-
-        return root;
+        return null;
     }
 
     // работает
