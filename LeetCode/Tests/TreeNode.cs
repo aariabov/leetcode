@@ -13,6 +13,11 @@ public class TreeNode
         this.right = right;
     }
 
+    public override string ToString()
+    {
+        return val.ToString();
+    }
+
     public static TreeNode? BuildTree(int?[]? values)
     {
         if (values == null || values.Length == 0 || values[0] == null)
