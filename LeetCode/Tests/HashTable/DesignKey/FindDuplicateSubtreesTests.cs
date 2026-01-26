@@ -2,7 +2,7 @@ using FluentAssertions;
 
 namespace Tests.HashTable.DesignKey;
 
-// Найти дубли поддеревьев https://leetcode.com/explore/learn/card/hash-table/185/hash_table_design_the_key/1127/
+// [Найти дубли поддеревьев](https://leetcode.com/explore/learn/card/hash-table/185/hash_table_design_the_key/1127/)
 public class FindDuplicateSubtreesTests
 {
     [Fact]
@@ -27,7 +27,7 @@ public class FindDuplicateSubtreesTests
         var expected = new List<TreeNode> { e3, e1 };
         result.Should().BeEquivalentTo(expected);
     }
-    
+
     [Fact]
     public void Test1()
     {
@@ -42,7 +42,7 @@ public class FindDuplicateSubtreesTests
         var expected = new List<TreeNode> { e1 };
         result.Should().BeEquivalentTo(expected);
     }
-    
+
     [Fact]
     public void Test3()
     {
@@ -61,7 +61,7 @@ public class FindDuplicateSubtreesTests
         var expected = new List<TreeNode> { e3, e1 };
         result.Should().BeEquivalentTo(expected);
     }
-    
+
     [Fact]
     public void Test4()
     {
@@ -109,13 +109,13 @@ public class FindDuplicateSubtreesTests
             {
                 result.Add(node);
             }
-            
+
             return nodeStr;
         }
 
         return result;
     }
-    
+
     [Fact]
     public void TestStack()
     {
@@ -135,7 +135,7 @@ public class FindDuplicateSubtreesTests
         e4.left = e6;
 
         var result = GetValsStack(e0);
-        var expected = new int?[] { 1,2,4,3,2,4,4 };
+        var expected = new int?[] { 1, 2, 4, 3, 2, 4, 4 };
         result.Should().BeEquivalentTo(expected);
     }
 
@@ -159,7 +159,7 @@ public class FindDuplicateSubtreesTests
 
         return result.ToArray();
     }
-    
+
     [Fact]
     public void TestRecursive()
     {
@@ -179,7 +179,7 @@ public class FindDuplicateSubtreesTests
         e4.left = e6;
 
         var result = GetValsRecursive(e0);
-        var expected = new int?[] { 1,2,4,3,2,4,4 };
+        var expected = new int?[] { 1, 2, 4, 3, 2, 4, 4 };
         result.Should().BeEquivalentTo(expected);
     }
 

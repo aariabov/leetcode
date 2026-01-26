@@ -84,7 +84,7 @@ public class LevelOrderTests
         return result;
     }
 
-    private void DFS(TreeNode node, int level, IList<IList<int>> result)
+    private void DFS(TreeNode? node, int level, IList<IList<int>> result)
     {
         if (node == null)
             return;
