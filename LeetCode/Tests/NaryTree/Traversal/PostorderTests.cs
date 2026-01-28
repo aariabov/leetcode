@@ -1,22 +1,22 @@
 namespace Tests.NaryTree.Traversal;
 
 /// <summary>
-/// [Preorder обход n-арного дерева](https://leetcode.com/explore/learn/card/n-ary-tree/130/traversal/925/)
+/// [Postorder обход n-арного дерева](https://leetcode.com/explore/learn/card/n-ary-tree/130/traversal/926/)
 /// </summary>
-public class PreorderTests
+public class PostorderTests
 {
     [Fact]
-    public void Test()
+    public void Test1()
     {
         var e1 = Node.BuildTree([1, null, 3, 2, 4, null, 5, 6]);
 
-        var result = Preorder(e1);
-        var expected = new int[] { 1, 3, 5, 6, 2, 4 };
+        var result = Postorder(e1);
+        var expected = new int[] { 5, 6, 3, 2, 4, 1 };
         Assert.Equal(expected, result);
     }
 
     [Fact]
-    public void Test1()
+    public void Test2()
     {
         var e1 = Node.BuildTree(
             [
@@ -48,13 +48,13 @@ public class PreorderTests
             ]
         );
 
-        var result = Preorder(e1);
-        var expected = new int[] { 1, 2, 3, 6, 7, 11, 14, 4, 8, 12, 5, 9, 13, 10 };
+        var result = Postorder(e1);
+        var expected = new int[] { 2, 6, 14, 11, 7, 3, 12, 8, 4, 13, 9, 10, 5, 1 };
         Assert.Equal(expected, result);
     }
 
     // решение аналогичное бинарному дереву
-    public IList<int> Preorder(Node root)
+    public IList<int> Postorder(Node root)
     {
         var res = new List<int>();
         Rec(root);
@@ -67,12 +67,12 @@ public class PreorderTests
                 return;
             }
 
-            res.Add(node.val);
-
             foreach (var child in node.children)
             {
                 Rec(child);
             }
+
+            res.Add(node.val);
         }
     }
 }
