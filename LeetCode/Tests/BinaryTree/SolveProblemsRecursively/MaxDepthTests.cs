@@ -70,7 +70,7 @@ public class MaxDepthTests
         return depth;
     }
 
-    // Top-Down рекурсивное решение
+    // Top-Down (передаем значение depth + 1 детям) рекурсивное решение
     public int MaxDepthTopDown(TreeNode root)
     {
         var result = 0;
@@ -92,7 +92,7 @@ public class MaxDepthTests
         return result;
     }
 
-    // Bottom-up рекурсивное решение
+    // Bottom-up (c самого низа возвращаем значение) рекурсивное решение
     public int MaxDepthBottomUp(TreeNode root)
     {
         if (root == null)
