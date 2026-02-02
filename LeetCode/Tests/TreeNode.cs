@@ -18,6 +18,67 @@ public class TreeNode
         return val.ToString();
     }
 
+    // ===== Preorder =====
+    public IEnumerable<int> Preorder()
+    {
+        yield return val;
+
+        if (left != null)
+            foreach (var v in left.Preorder())
+                yield return v;
+
+        if (right != null)
+            foreach (var v in right.Preorder())
+                yield return v;
+    }
+
+    // ===== Inorder =====
+    public IEnumerable<int> Inorder()
+    {
+        if (left != null)
+            foreach (var v in left.Inorder())
+                yield return v;
+
+        yield return val;
+
+        if (right != null)
+            foreach (var v in right.Inorder())
+                yield return v;
+    }
+
+    // ===== Postorder =====
+    public IEnumerable<int> Postorder()
+    {
+        if (left != null)
+            foreach (var v in left.Postorder())
+                yield return v;
+
+        if (right != null)
+            foreach (var v in right.Postorder())
+                yield return v;
+
+        yield return val;
+    }
+
+    // ===== Level order (BFS) =====
+    public IEnumerable<int> LevelOrder()
+    {
+        var queue = new Queue<TreeNode>();
+        queue.Enqueue(this);
+
+        while (queue.Count > 0)
+        {
+            var node = queue.Dequeue();
+            yield return node.val;
+
+            if (node.left != null)
+                queue.Enqueue(node.left);
+
+            if (node.right != null)
+                queue.Enqueue(node.right);
+        }
+    }
+
     public static TreeNode? BuildTree(int?[]? values)
     {
         if (values == null || values.Length == 0 || values[0] == null)
