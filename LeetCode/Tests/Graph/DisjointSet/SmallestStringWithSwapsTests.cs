@@ -19,7 +19,67 @@ public class SmallestStringWithSwapsTests
         Assert.Equal(expected, result);
     }
 
+    // решение через dfs
     public string SmallestStringWithSwaps(string s, IList<IList<int>> pairs)
+    {
+        int n = s.Length;
+        List<int>[] adj = new List<int>[n];
+        for (int i = 0; i < n; i++)
+        {
+            adj[i] = new List<int>();
+        }
+
+        // 1. Build the graph
+        foreach (var pair in pairs)
+        {
+            adj[pair[0]].Add(pair[1]);
+            adj[pair[1]].Add(pair[0]);
+        }
+
+        char[] result = new char[n];
+        bool[] visited = new bool[n];
+
+        for (int i = 0; i < n; i++)
+        {
+            if (!visited[i])
+            {
+                List<int> indices = new List<int>();
+                List<char> characters = new List<char>();
+
+                // 2. Local DFS function
+                void Dfs(int node)
+                {
+                    visited[node] = true;
+                    indices.Add(node);
+                    characters.Add(s[node]);
+
+                    foreach (int neighbor in adj[node])
+                    {
+                        if (!visited[neighbor])
+                        {
+                            Dfs(neighbor);
+                        }
+                    }
+                }
+
+                // Execute search for the current component
+                Dfs(i);
+
+                // 3. Sort both lists to place smallest chars in smallest indices
+                indices.Sort();
+                characters.Sort();
+
+                for (int j = 0; j < indices.Count; j++)
+                {
+                    result[indices[j]] = characters[j];
+                }
+            }
+        }
+
+        return new string(result);
+    }
+
+    public string SmallestStringWithSwaps1(string s, IList<IList<int>> pairs)
     {
         // рассматриваем символы, как узлы, а пары как ребра (связи).
         // по итогу получаем группы символов
