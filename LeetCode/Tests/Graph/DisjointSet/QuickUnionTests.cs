@@ -31,14 +31,17 @@ public class QuickUnionTests
         public UnionFind(int size)
         {
             root = new int[size];
+            // изначально, все элементы сами по себе (сами являются рутом)
             for (int i = 0; i < size; i++)
             {
                 root[i] = i;
             }
         }
 
+        // ищет рута, O(n)
         public int Find(int x)
         {
+            // поднимаемся вверх до рута
             while (x != root[x])
             {
                 x = root[x];
@@ -46,13 +49,14 @@ public class QuickUnionTests
             return x;
         }
 
-        // выполняется быстрее, чем в QuickFind
+        // выполняется быстрее, чем в QuickFind, O(n)
         public void Union(int x, int y)
         {
             int rootX = Find(x);
             int rootY = Find(y);
             if (rootX != rootY)
             {
+                // для элементов, у которых рут был rootY, после объединения будет rootX
                 root[rootY] = rootX;
             }
         }

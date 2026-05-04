@@ -27,7 +27,7 @@ public class UnionByRankTests
     private class UnionFind
     {
         private int[] root;
-        private int[] rank;
+        private int[] rank; // используется, чтобы дерево не разрасталось в высоту, ибо в высоком дереве дольше искать
 
         public UnionFind(int size)
         {
@@ -36,10 +36,11 @@ public class UnionByRankTests
             for (int i = 0; i < size; i++)
             {
                 root[i] = i;
-                rank[i] = 1;
+                rank[i] = 1; // изначально, ранг у всех 1
             }
         }
 
+        // O(logN)
         public int Find(int x)
         {
             while (x != root[x])
@@ -49,7 +50,7 @@ public class UnionByRankTests
             return x;
         }
 
-        // идея: сделать сбалансированное дерево (с минимальной высотой), чтобы поиск работал за logN
+        // идея: сделать сбалансированное дерево (с минимальной высотой), чтобы поиск работал за O(logN)
         public void Union(int x, int y)
         {
             int rootX = Find(x);
@@ -58,14 +59,17 @@ public class UnionByRankTests
             {
                 if (rank[rootX] > rank[rootY])
                 {
+                    // если дерево rootX выше, то присоединяем к нему
                     root[rootY] = rootX;
                 }
                 else if (rank[rootX] < rank[rootY])
                 {
+                    // если дерево rootY выше, то присоединяем к нему
                     root[rootX] = rootY;
                 }
                 else
                 {
+                    // иначе, присоединяем к rootX и увеличиваем ранг (высоту)
                     root[rootY] = rootX;
                     rank[rootX] += 1;
                 }

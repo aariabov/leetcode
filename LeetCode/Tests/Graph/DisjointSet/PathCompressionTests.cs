@@ -37,16 +37,22 @@ public class PathCompressionTests
             }
         }
 
-        // Path Compression: updates root[x] to the actual root during recursion
+        // поиск рута и обновление всех парентов до рутов, O(logN)
         public int Find(int x)
         {
             if (x == root[x])
             {
                 return x;
             }
-            return root[x] = Find(root[x]);
+
+            int rootOfX = Find(root[x]);
+            // присваиваем рут (сжатие пути)
+            root[x] = rootOfX;
+
+            return rootOfX;
         }
 
+        // O(logN)
         public void Union(int x, int y)
         {
             int rootX = Find(x);

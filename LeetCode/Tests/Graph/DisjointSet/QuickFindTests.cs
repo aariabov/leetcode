@@ -31,26 +31,31 @@ public class QuickFindTests
         public UnionFind(int size)
         {
             arr = new int[size];
+            // изначально, все элементы сами по себе (сами являются рутом)
             for (int i = 0; i < size; i++)
             {
                 arr[i] = i;
             }
         }
 
-        private int GetRoot(int x)
+        // возвращает рута для элемента, работает как O(1), потому что держим актуальным массив рутов
+        private int Find(int x)
         {
             return arr[x];
         }
 
-        // при связи для элемента y задаем рута элемента x
+        // присоединяем y к x, работает со скоростью O(n)
         public void Union(int x, int y)
         {
-            int rootX = GetRoot(x);
-            int rootY = GetRoot(y);
+            // определяем рутов
+            int rootX = Find(x);
+            int rootY = Find(y);
+            // если руты разные, значит это два разных дерева (набора) - соединяем их
             if (rootX != rootY)
             {
                 for (int i = 0; i < arr.Length; i++)
                 {
+                    // для элементов, у которых рут был rootY, после объединения будет rootX
                     if (arr[i] == rootY)
                     {
                         arr[i] = rootX;
@@ -62,7 +67,7 @@ public class QuickFindTests
         // если у элементов одинаковый рут - они связаны (находятся в одном наборе)
         public bool Connected(int x, int y)
         {
-            return GetRoot(x) == GetRoot(y);
+            return Find(x) == Find(y);
         }
     }
 }
