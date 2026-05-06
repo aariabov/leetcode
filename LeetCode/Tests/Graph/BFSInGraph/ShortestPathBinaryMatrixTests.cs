@@ -1,6 +1,4 @@
-﻿using FluentAssertions;
-
-namespace Tests.Graph.DFSInGraph;
+﻿namespace Tests.Graph.BFSInGraph;
 
 // [Найти кратчайший путь в матрице](https://leetcode.com/explore/learn/card/graph/620/breadth-first-search-in-graph/3896/)
 public class ShortestPathBinaryMatrixTests

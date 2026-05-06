@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 
-namespace Tests.Graph.DFSInGraph;
+namespace Tests.Graph.BFSInGraph;
 
 // [Все пути между вершинами](https://leetcode.com/explore/learn/card/graph/619/depth-first-search-in-graph/3849/)
 // https://leetcode.com/explore/learn/card/graph/620/breadth-first-search-in-graph/3853/
