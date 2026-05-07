@@ -1,7 +1,7 @@
 ﻿namespace Tests.Graph.MST;
 
 // [Соединить все точки с минимальной стоимостью](https://leetcode.com/explore/learn/card/graph/621/algorithms-to-construct-minimum-spanning-tree/3857/)
-public class MinCostConnectPointsTests
+public class MinCostConnectPointsKraskalTests
 {
     public static IEnumerable<object[]> MatrixData =>
         new List<object[]>
