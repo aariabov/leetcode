@@ -36,12 +36,14 @@ public class FindOrderTests
             adj[i] = [];
         }
 
+        // составляем матрицу смежности, и определяем количество входящих
         foreach (var p in prerequisites)
         {
             adj[p[1]].Add(p[0]);
             ins[p[0]]++;
         }
 
+        // добавляем в очередь узлы, которые ни от кого не зависят
         var queue = new Queue<int>();
         for (int i = 0; i < ins.Length; i++)
         {
@@ -63,7 +65,10 @@ public class FindOrderTests
 
                 foreach (var neighbor in adj[curr])
                 {
+                    // уменьшаем количество входящих
                     ins[neighbor]--;
+
+                    // если узел больше ни от кого не зависит, то добавляем его в очередь
                     if (ins[neighbor] == 0)
                     {
                         queue.Enqueue(neighbor);
