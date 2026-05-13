@@ -31,6 +31,7 @@ public class RobTests
         return dp[nums.Length - 1];
     }
 
+    // рекурсивный вариант, работает и быстро
     public int RobRec(int[] nums)
     {
         var hash = new int?[nums.Length];
