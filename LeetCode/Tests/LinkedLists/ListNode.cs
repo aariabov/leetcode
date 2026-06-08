@@ -10,4 +10,9 @@ public class ListNode
         val = x;
         next = null;
     }
+
+    public override string ToString()
+    {
+        return val.ToString();
+    }
 }
